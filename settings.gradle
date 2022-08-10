@@ -1,0 +1,5 @@
+rootProject.name = 'golf_match'
+include 'core'
+include 'api'
+include 'admin'
+
