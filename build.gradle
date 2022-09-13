@@ -9,6 +9,8 @@ buildscript {
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
         classpath "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
+
+
     }
 }
 
@@ -37,8 +39,17 @@ subprojects {
         annotationProcessor 'org.projectlombok:lombok'
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+        // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
+        testImplementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.36', ext: 'pom'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+        testImplementation "org.junit.platform:junit-platform-launcher:1.5.1"
+
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+        testRuntimeOnly 'org.junit.platform:junit-platform-engine:1.8.1'
+        testRuntimeOnly 'org.junit.platform:junit-platform-commons:1.8.1'
     }
 
     test {
@@ -48,7 +59,6 @@ subprojects {
 
 // 각 프로젝트에서만 사용하는 의존성 추가
 project(':core') {
-
     // core 에서는 bootjar로 패키징 할 필요가 없으므로 추가
     bootJar.enabled = false
     jar.enabled = true
